@@ -1,0 +1,64 @@
+<comp [allCount] = "getAllCount()" [electronicsCount] = "getElectronicsCount()"
+[fashionCount] = "getFashionCount()" [mobileCount] = "getMobileCount()" 
+[booksCount] = "getBooksCount()"
+
+(sendSelectedValue) = "getSelectedValueFromChild($event)">
+
+</comp>
+
+<div *ngIf = "show2 == false">
+    <input type = "button" value = "ShowProductslessthan10000" on-click = "show2True()">
+</div>
+
+
+<div *ngIf = "show2 == true">
+    <input type = "button" value = "HideProductslessthan10000" on-click = "show2False()">
+    <table border = "1">
+        <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Description</th>
+        </tr>
+        <ng-container  *ngFor = "let product of productsList"> 
+        <tr *ngIf = "product.price < 10000 ">
+            <td>{{product.name | namePipe:product.category}}</td>
+            <td>{{product.category}}</td>
+            <td>{{product.price  | currency:'INR'}}</td>
+            <td>{{product.quantity}}</td>
+            <td>{{product.description}}</td>
+        </tr>
+    </ng-container>
+     
+    </table>
+</div>
+
+
+
+<div *ngIf = "show == true">
+<input type = "button" value = "Hide Product Table" on-click="showFalse()">
+<table border = "1">
+    <tr>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Description</th>
+    </tr>
+    <ng-container  *ngFor = "let product of productsList"> 
+    <tr *ngIf = "selectedValue == 'All'|| product.price == selectedValue || product.category == selectedValue ">
+        <td>{{product.name | namePipe:product.category}}</td>
+        <td>{{product.category}}</td>
+        <td>{{product.price  | currency:'INR'}}</td>
+        <td>{{product.quantity}}</td>
+        <td>{{product.description}}</td>
+    </tr>
+</ng-container>
+ 
+</table>
+</div>
+
+<div *ngIf="show == false">
+    <input type = "button" value = "Show Product Table" on-click="showTrue()">
+</div>
